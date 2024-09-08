@@ -24,6 +24,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public class Controlador extends HttpServlet {
     private final IProducto prodDAO;
@@ -353,6 +354,21 @@ public class Controlador extends HttpServlet {
                             request.setAttribute("Mensaje", "Error o No se puede Eliminar Usuario");
                             request.getRequestDispatcher("mensaje.jsp").forward(request, response);
                         }
+                    break;
+                    case "GuardarComentario":
+                        String comentario = request.getParameter("comentario");
+                        // Obtener la sesión antes de intentar guardar atributos en ella
+                        HttpSession session = request.getSession();
+           
+                        // Guardar el comentario en la sesión sin sanitizar
+                        session.setAttribute("comentario", comentario);
+                        
+                        // Obtener la lista de usuarios para que se muestre nuevamente en la página
+                        List<Usuario> usuari = userDAO.getUsuarios();
+                        request.setAttribute("usuarios", usuari);
+
+                        // Redirigir de nuevo a la página del usuario
+                        request.getRequestDispatcher("usuario.jsp").forward(request, response);
                     break;
                     default:
                         throw new AssertionError();
