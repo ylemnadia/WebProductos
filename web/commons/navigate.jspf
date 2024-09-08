@@ -14,7 +14,7 @@
                     <span class="sr-only">(current)</span>
                 </a>
             </li>
-            <c:if test="${Empleado!=null&&Empleado.perfil=='ADMINISTRADOR'}">
+            <c:if test="${sessionScope.Empleado!=null && sessionScope.Empleado.perfil=='ADMINISTRADOR'}">
                 <li class="nav-item dropdown  ">
                     
                     <a class="nav-link dropdown-toggle " href="#"
@@ -60,14 +60,6 @@
                             </a>
                         </li>
                         <li><hr class="dropdown-divider"></li>
-                       
-                        
-                    <!-- <li>
-                            <a class="dropdown-item" href="Controlador?menu=Empleado&accion=Listar">
-                                <img src="img/icons/empleado.png" alt=""/> Empleados
-                            </a>
-                        </li>
-                        <li><hr class="dropdown-divider"></li> -->                                
                                  
                         <li>
                             <a class="dropdown-item" href="Controlador?menu=Proveedor&accion=Listar">
@@ -80,23 +72,26 @@
         </ul>
         
         <ul class="nav justify-content-end">
-            <li class="nav-item dropdown ">
-                <a class="nav-link dropdown-toggle" href="#"
-                   id="navbarScrollingDropdown2" role="button" data-toggle="dropdown"
-                   aria-expanded="false" style="color: black; font-weight: bold">
-                    <img src="img/icons/user.png" alt=""/>  ${Empleado.nombres} 
-                </a>
-                
-                <ul class="dropdown-menu text-center dropdown-menu-right"
-                    aria-labelledby="navbarScrollingDropdown2">
-                    <li><a class="dropdown-item" href="#"><i
-                                class="bi bi-person-circle"
-                                style="font-size: 3rem; color: cornflowerblue;"></i></a></li>
-                    <li><a class="dropdown-item" href="#">${Empleado.user}</a></li>
-                    <li><a class="dropdown-item" href="#">${Empleado.correo}</a></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="ControladorLogin?accion=Salir">Salir</a></li>
-                </ul></li>
+            <c:if test="${not empty sessionScope.Empleado}">
+                <li class="nav-item dropdown ">
+                    <a class="nav-link dropdown-toggle" href="#"
+                       id="navbarScrollingDropdown2" role="button" data-toggle="dropdown"
+                       aria-expanded="false" style="color: black; font-weight: bold">
+                        <img src="img/icons/user.png" alt=""/>  ${sessionScope.Empleado.nombres} 
+                    </a>
+
+                    <ul class="dropdown-menu text-center dropdown-menu-right"
+                        aria-labelledby="navbarScrollingDropdown2">
+                        <li><a class="dropdown-item" href="#"><i
+                                    class="bi bi-person-circle"
+                                    style="font-size: 3rem; color: cornflowerblue;"></i></a></li>
+                        <li><a class="dropdown-item" href="#">${sessionScope.Empleado.user}</a></li>
+                        <li><a class="dropdown-item" href="#">${sessionScope.Empleado.correo}</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="ControladorLogin?accion=Salir">Salir</a></li>
+                    </ul>
+                </li>
+            </c:if>
         </ul>
     </div>
 </nav>
