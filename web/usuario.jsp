@@ -14,7 +14,7 @@
                         </div>
                         
                         <div class="form-group">
-                            <label>Contrase�a</label>
+                            <label>Contraseña</label>
                             <div class="input-group">
                                 <input type="password" value="${usuario.password}" name="txtPassword" id="password" class="form-control">
                                 <div class="input-group-append">
@@ -77,12 +77,36 @@
             </div>
         </div>
     </div>
-</div>
+                                            
+                        
 
-<!-- Bot�n rojo al final con icono de casa -->
+        <!-- Nueva sección de comentarios -->
+        <div class="card mt-4">
+            <div class="card-body">
+                <h5>Deja tu comentario:</h5>
+                <form action="Controlador?menu=Usuario&accion=GuardarComentario" method="POST">
+                    <div class="form-group">
+                        <input type="text" name="comentario" class="form-control" placeholder="Escribe un comentario...">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Enviar</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Mostrar comentario vulnerable a XSS -->
+        <div class="card mt-4">
+            <div class="card-body">
+                <h5>Comentario Recibido:</h5>
+                <p>${sessionScope.comentario}</p>
+            </div>
+        </div>                       
+    </div>                        
+
+                        
+<!-- Botón rojo al final con icono de casa -->
 <div class="text-center mt-4">
     <a href="Principal.jsp" class="btn btn-danger btn-lg">
-        <i class="fas fa-home"></i> Volver a la P�gina Principal
+        <i class="fas fa-home"></i> Volver a la Página Principal
     </a>
 </div>                            
 
